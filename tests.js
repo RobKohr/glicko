@@ -48,12 +48,22 @@ var teamTest = function(){
     out(filterObjectArray(result.players, ['last_result', 'name']));
 }
 
-var teamSimulate = function(){
+var oneVSOneSimulate = function(){
+    teamSimulate(1);
+}
+
+var fiveVSFiveSimulate = function(){
+    teamSimulate(5);
+}
+
+var teamSimulate = function(team_size){
+    if(!team_size)
+	team_size = 2;
     outClear();
     out("Description");
     out("Creates 10 players with skills 1-10. The sum of two players on the team is the team's skill");
     out("This will run until the ratings of all of the players are ordered the same as their skill");
-    out("Matches are random pairings of 2 vs 2");
+    out("Matches are random pairings of "+team_size+" vs "+team_size);
     var players = [];
     for(var i = 1; i<=10; i++){
 	var player = {name:i+'', expected_rank:i};
@@ -75,7 +85,7 @@ var teamSimulate = function(){
 	    var team = {rank:0};
 	    team.players = [];
 
-	    for(var p = 0; p<=1; p++){
+	    for(var p = 0; p<team_size; p++){
 		var player = shuffledPlayers[i];
 		i++;
 		team.rank+=player.expected_rank;
