@@ -1,7 +1,0 @@
-glicko
-======
-
-Implements glicko-2 rating system along with a ffa-team based setup.
-
-Based on http://www.glicko.net/glicko/glicko2.pdf
-
