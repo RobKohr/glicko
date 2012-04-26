@@ -14,3 +14,12 @@ results
 node_modules
 npm-debug.log
 .DS_Store
+#*
+*~
+#README.md#
+
+.#README.md
+
+#README.md#
+
+#README.md#
