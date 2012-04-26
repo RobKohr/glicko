@@ -3,18 +3,6 @@
 //wrapper to make it easier to use as a node.js module
 (function(exports){
 
-
-    //some helper functions
-    var pow = Math.pow;
-    var pi = Math.PI;
-
-    function ln(val){
-	return Math.log(val) / Math.LOG10E;
-    }
-    var debug = function(v){
-	console.log(JSON.stringify(v));
-    }
-
     exports.playerInit = function(player){
 	if(!player.rating)
 	    player.rating = 1500;
@@ -27,26 +15,10 @@
 	return player;
     }
 
-    Array.prototype.each = function(callback){
-	var arr = this;
-	for(var i = 0; i<arr.length; i++){
-	    var el = arr[i];
-	    if(typeof(el)!='function')
-		callback(el, i);
-	}
-    }
-
-    Object.prototype.each = function(callback){
-	var obj = this;
-	for(var key in obj){
-	    var el = obj[key];
-	    if(typeof(el)!='function')
-		callback(el, key);
-	}
-    }
-
 
     /*
+Glicko-2 main function (attempts to follow the paper)
+
 Calculate the adjustments to a player after playing against a set of opponents.
 
 Returns an output of an object like so
@@ -229,6 +201,8 @@ for example 0.5 to half the weight when you are playing on a team of two players
 
 
 /* 
+Team match calculator (and updater of players in the match)
+
 Example:
 teams = 
 [
@@ -315,5 +289,41 @@ returns {
 	    return .5;
 	return 1;
     }
+
+
+
+
+
+//   Helper Functions ///
+    var pow = Math.pow;
+    var pi = Math.PI;
+
+    function ln(val){
+	return Math.log(val) / Math.LOG10E;
+    }
+    var debug = function(v){
+	console.log(JSON.stringify(v));
+    }
+
+
+    Array.prototype.each = function(callback){
+	var arr = this;
+	for(var i = 0; i<arr.length; i++){
+	    var el = arr[i];
+	    if(typeof(el)!='function')
+		callback(el, i);
+	}
+    }
+
+    Object.prototype.each = function(callback){
+	var obj = this;
+	for(var key in obj){
+	    var el = obj[key];
+	    if(typeof(el)!='function')
+		callback(el, key);
+	}
+    }
+
+
 
 })(typeof exports === 'undefined'? this['glicko']={}: exports);//end module

@@ -1,10 +1,3 @@
-var outClear = function(){
-    document.getElementById('output').innerHTML = ''
-}
-var out = function(obj){
-    document.getElementById('output').innerHTML += '<pre>'+JSON.stringify(obj, null, '\t')+'</pre><hr>';
-}
-
 var basicTest = function(){
     outClear();
     var player = {name:'a', rating:1500, rd:200, match_rank:3}
@@ -55,12 +48,6 @@ var teamTest = function(){
     out(filterObjectArray(result.players, ['last_result', 'name']));
 }
 
-var randInt = function(min, max){
-    var range = max-min;
-    var offset = Math.floor(Math.random()*range);
-    return offset+min;
-}
-
 var teamSimulate = function(){
     outClear();
     out("Description");
@@ -108,9 +95,35 @@ var teamSimulate = function(){
     }
     out('done');
     out('Number of matches = '+c);
-    
-//    use flot;
 }
+//players should already be sorted by skill, so 
+var arePlayersProperlyRated = function(players){
+    sortByProperty(players, 'expected_rank', -1);
+    var prev = null;
+    for(var i=0; i<players.length; i++){
+	var p = players[i];
+	if((prev == null)){
+	    prev = p.rating;
+	    continue
+	}else if(p.rating < prev){
+	    //fine
+	    prev = p.rating;
+	    continue;
+	}else{
+	    if(p.rating==null)
+		console.log('hre', p);
+
+	    out('FAIL -> '+p.rating+' is greater than' +  prev);
+	    return false;//rating should be less than previous
+	}
+    }
+    out('YES!!!');
+    return true;
+}
+
+
+
+//   Helper functions //
 
 var filterObjectArray = function(arr, included_properties_arr){
     var out = [];
@@ -143,30 +156,6 @@ var randomFromArray = function(arr){
     return arr[i];
 }
 
-//players should already be sorted by skill, so 
-var arePlayersProperlyRated = function(players){
-    sortByProperty(players, 'expected_rank', -1);
-    var prev = null;
-    for(var i=0; i<players.length; i++){
-	var p = players[i];
-	if((prev == null)){
-	    prev = p.rating;
-	    continue
-	}else if(p.rating < prev){
-	    //fine
-	    prev = p.rating;
-	    continue;
-	}else{
-	    if(p.rating==null)
-		console.log('hre', p);
-
-	    out('FAIL -> '+p.rating+' is greater than' +  prev);
-	    return false;//rating should be less than previous
-	}
-    }
-    out('YES!!!');
-    return true;
-}
 
 //order = 1 for asc, -1 for desc
 var sortByProperty = function(arr, prop, order){
@@ -183,3 +172,18 @@ var sortByProperty = function(arr, prop, order){
     });    
     return arr;
 }
+
+
+var randInt = function(min, max){
+    var range = max-min;
+    var offset = Math.floor(Math.random()*range);
+    return offset+min;
+}
+
+var outClear = function(){
+    document.getElementById('output').innerHTML = ''
+}
+var out = function(obj){
+    document.getElementById('output').innerHTML += '<pre>'+JSON.stringify(obj, null, '\t')+'</pre><hr>';
+}
+
