@@ -74,11 +74,13 @@ var teamSimulate = function(team_size){
 	shuffledPlayers.push(player);
     })
 
+    out('Running... (please be patient)');
+
     for(var c = 1; c<200; c++){
 	//each loop, shuffle up players and deal them into two teams
 	var teams = [];
 	shuffledPlayers.shuffle();
-	sortByProperty(shuffledPlayers, 'rd', 1);
+//	sortByProperty(shuffledPlayers, 'rd', 1);
 	var start = randInt(0, players.length-4)
 	var i = 0;
 	for(var t = 0; t<=1; t++){
@@ -108,7 +110,7 @@ var teamSimulate = function(team_size){
 }
 //players should already be sorted by skill, so 
 var arePlayersProperlyRated = function(players){
-    sortByProperty(players, 'expected_rank', -1);
+    sortByProperty(players, 'expected_rank', 1);
     var prev = null;
     for(var i=0; i<players.length; i++){
 	var p = players[i];
@@ -174,9 +176,9 @@ var sortByProperty = function(arr, prop, order){
     arr.sort(function(a, b){
 	if(a[prop] == b[prop])
 	    return 0;
-	if(a.skill > b.skill)
+	if(a[prop] > b[prop])
 	    var out = 1;
-	if(a.skill < b.skill)
+	if(a[prop] < b[prop])
 	    var out = -1;
 	return order * out;
     });    
