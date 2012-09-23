@@ -135,14 +135,14 @@ for example 0.5 to half the weight when you are playing on a team of two players
 
 	//5.2
 	var A = a;
-	if( pow(delta,2) > (pow(p.vol,2) + v) ){
-	    var B = ln(pow(delta,2) - pow(p.rd2,2), v);
+	if( pow(delta,2) > (pow(p.rd2,2) + v) ){
+	    var B = ln(pow(delta,2) - pow(p.rd2,2) - v);
 	}else{
 	    var k = 1;
-	    while(f(a - (k*Math.sqrt(Math.pow(t,2)))) < 0){
+	    while(f(a - (k*Math.abs(t))) < 0){
 		k = k+1;
 	    }
-	    var B = a - k * Math.sqrt(Math.pow(t,2));
+	    var B = a - k * Math.abs(t);
 	}
 
 	//5.3
@@ -186,7 +186,7 @@ for example 0.5 to half the weight when you are playing on a team of two players
 
 	//step 8 convert back to original scale
 	p.rating = p.rating2 * 173.7178 + 1500;
-	p.rd = p.rd2 * 173.7171;
+	p.rd = p.rd2 * 173.7178;
 
 	out.change.rating = (p.rating - out.init.rating)*factor;
 	out.change.rd = (p.rd - out.init.rd)*factor;
