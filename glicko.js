@@ -135,7 +135,7 @@ for example 0.5 to half the weight when you are playing on a team of two players
 
 	//5.2
 	var A = a;
-	if( pow(delta,2) > (pow(p.vol,2) + v) ){
+	if( pow(delta,2) > (pow(p.rd2,2) + v) ){
 	    var B = ln(pow(delta,2) - pow(p.rd2,2), v);
 	}else{
 	    var k = 1;
