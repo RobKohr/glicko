@@ -34,7 +34,7 @@ rating_period should be the time in seconds in which a player typically plays
 10-15 games. Default is a month. Currently not used in calculations
 
 For system_constants, the paper says pick a number .3 to 1.2.
-Adjust to achieve better predictive accuracy. Default is .50
+Adjust to achieve better predictive accuracy. Default is .5
 (perhaps a function should be written to calculate a good system_constant)
 
 factor is something I added that isn't in the paper. All outputs are multiplied by
