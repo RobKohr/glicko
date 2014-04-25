@@ -34,7 +34,7 @@ rating_period should be the time in seconds in which a player typically plays
 10-15 games. Default is a month. Currently not used in calculations
 
 For system_constants, the paper says pick a number .3 to 1.2.
-Adjust to achieve better predictive accuracy. Default is .75
+Adjust to achieve better predictive accuracy. Default is .50
 (perhaps a function should be written to calculate a good system_constant)
 
 factor is something I added that isn't in the paper. All outputs are multiplied by
@@ -54,7 +54,7 @@ for example 0.5 to half the weight when you are playing on a team of two players
 	//step 1
 	//initialize
 	if(!t)
-	    t = 0.75;
+	    t = 0.5;
 
 	//p will be the returned object with the updated values for the player
 	var p = {};
