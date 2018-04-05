@@ -16,9 +16,7 @@
 	player.rd2 = player.rd/173.7178
 	return player;
     }
-
-
-    /*
+/*
 Glicko-2 main function (attempts to follow the paper)
 
 Calculate the adjustments to a player after playing against a set of opponents.
